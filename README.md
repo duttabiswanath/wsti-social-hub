@@ -195,20 +195,35 @@ wsti-social-hub/
 
 ## 🔑 Environment Variables
 
-| Variable | Required | Description |
-|---|---|---|
-| `GEMINI_API_KEY` | ⚠️ Optional* | Google Gemini API key — [get one free](https://aistudio.google.com/app/apikey) |
-| `GEMINI_MODEL` | ❌ No | Text model. Default: `gemini-2.5-pro` |
-| `IMAGEN_MODEL` | ❌ No | Image model. Default: `gemini-3.1-flash-image-preview` |
-| `BLOTATO_API_KEY` | ⚠️ Optional* | Blotato API key — [get from your dashboard](https://my.blotato.com) |
-| `BLOTATO_LINKEDIN_ACCOUNT_ID` | ❌ No | Your LinkedIn account ID in Blotato |
-| `BLOTATO_INSTAGRAM_ACCOUNT_ID` | ❌ No | Your Instagram account ID in Blotato |
-| `BLOTATO_FACEBOOK_ACCOUNT_ID` | ❌ No | Your Facebook account ID in Blotato |
-| `BLOTATO_TWITTER_ACCOUNT_ID` | ❌ No | Your X/Twitter account ID in Blotato |
-| `GOOGLE_DRIVE_FOLDER_ID` | ❌ No | Google Drive folder ID for media uploads |
-| `PORT` | ❌ No | Local server port. Default: `3000` |
+> 💡 **You don't need a `.env` file to use this app.**
+> API keys can be entered directly inside the dashboard's ⚙️ **Settings** panel — they're saved in your browser and sent securely with every request. The `.env` file is only needed if you prefer server-side key storage for local development.
 
-> ⚠️ *Optional if using Netlify — keys can be entered inside the app's Settings panel instead.
+### 🤖 AI Keys
+
+| Variable | In `.env`? | Description |
+|---|---|---|
+| `GEMINI_API_KEY` | Optional fallback | Google Gemini API key — [get one free](https://aistudio.google.com/app/apikey). Enter in-app via Settings instead. |
+| `GEMINI_MODEL` | Optional | Text generation model. Default: `gemini-2.5-pro` |
+| `IMAGEN_MODEL` | Optional | Image generation model. Default: `gemini-3.1-flash-image-preview` |
+
+### 📣 Blotato (Social Publishing)
+
+| Variable | In `.env`? | Description |
+|---|---|---|
+| `BLOTATO_API_KEY` | Optional fallback | Blotato API key — [get from your dashboard](https://my.blotato.com). Enter in-app via Settings instead. |
+| `BLOTATO_LINKEDIN_ACCOUNT_ID` | Optional | Only needed if posting to LinkedIn |
+| `BLOTATO_INSTAGRAM_ACCOUNT_ID` | Optional | Only needed if posting to Instagram |
+| `BLOTATO_FACEBOOK_ACCOUNT_ID` | Optional | Only needed if posting to Facebook |
+| `BLOTATO_TWITTER_ACCOUNT_ID` | Optional | Only needed if posting to X / Twitter |
+
+> ℹ️ You only need the account IDs for the platforms you actually want to post to. Leave the others blank.
+
+### ⚙️ Other
+
+| Variable | In `.env`? | Description |
+|---|---|---|
+| `GOOGLE_DRIVE_FOLDER_ID` | Optional | Google Drive folder for media uploads — local dev only, not supported on Netlify |
+| `PORT` | Optional | Local server port. Default: `3000` |
 
 ---
 
