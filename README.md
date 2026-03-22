@@ -218,12 +218,53 @@ wsti-social-hub/
 
 > ℹ️ You only need the account IDs for the platforms you actually want to post to. Leave the others blank.
 
+### ☁️ Google Drive (Netlify — Service Account)
+
+| Variable | In Netlify env vars? | Description |
+|---|---|---|
+| `GOOGLE_SERVICE_ACCOUNT_JSON` | ✅ Required for Drive | Full contents of your service account JSON key file |
+| `GOOGLE_DRIVE_FOLDER_ID` | ✅ Required for Drive | The folder ID from your Google Drive URL |
+
 ### ⚙️ Other
 
 | Variable | In `.env`? | Description |
 |---|---|---|
-| `GOOGLE_DRIVE_FOLDER_ID` | Optional | Google Drive folder for media uploads — local dev only, not supported on Netlify |
 | `PORT` | Optional | Local server port. Default: `3000` |
+
+---
+
+## 📁 Google Drive Setup (Netlify)
+
+Unlike local development (which uses OAuth), **Netlify uses a Service Account** — a special Google identity that authenticates without any browser login or token files, making it perfect for serverless deployments and shared team use.
+
+### Step 1 — Create a Service Account
+
+1. Go to [Google Cloud Console](https://console.cloud.google.com/) → select or create a project
+2. Navigate to **APIs & Services** → **Library** → search for **Google Drive API** → click **Enable**
+3. Go to **APIs & Services** → **Credentials** → **+ Create Credentials** → **Service account**
+4. Give it a name (e.g. `wsti-drive-uploader`) → click **Create and Continue** → skip role → click **Done**
+5. Click on the newly created service account → go to the **Keys** tab
+6. Click **Add Key** → **Create new key** → choose **JSON** → click **Create**
+7. A JSON file downloads automatically — this is your key file 🔑
+
+### Step 2 — Share your Drive folder with the service account
+
+1. Open the downloaded JSON key file — find the `client_email` field (looks like `wsti-drive-uploader@your-project.iam.gserviceaccount.com`)
+2. Go to your Google Drive folder
+3. Click **Share** → paste the service account email → set role to **Editor** → click **Send**
+
+### Step 3 — Add credentials to Netlify
+
+1. Go to your Netlify site → **Site settings** → **Environment variables**
+2. Add a new variable:
+   - **Key:** `GOOGLE_SERVICE_ACCOUNT_JSON`
+   - **Value:** paste the **entire contents** of the downloaded JSON key file
+3. Add another variable:
+   - **Key:** `GOOGLE_DRIVE_FOLDER_ID`
+   - **Value:** the folder ID from your Drive URL (the part after `/folders/`)
+4. **Redeploy** the site for the variables to take effect
+
+> 🔒 **Security note:** The service account only has access to files it creates (via `drive.file` scope). It cannot read or modify any other files in your Google account.
 
 ---
 
@@ -244,9 +285,9 @@ wsti-social-hub/
 | YouTube Transcripts | ✅ Full support | ✅ Full support |
 | AI Image Generation | ✅ Full support | ✅ Full support |
 | Blotato Publishing | ✅ Full support | ✅ Full support |
-| Google Drive Upload | ❌ Not supported | ✅ Full support |
+| Google Drive Upload | ✅ Via Service Account | ✅ Via OAuth |
 
-> Google Drive requires OAuth token files that can't be stored on serverless platforms. All other features work identically on Netlify.
+> Local dev uses OAuth (browser login). Netlify uses a Service Account (JSON key stored as env var). Both upload to the same Google Drive folder — see the [Google Drive Setup](#-google-drive-setup-netlify) section above.
 
 ---
 

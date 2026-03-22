@@ -17,6 +17,16 @@
   status = 200
 
 [[redirects]]
+  from   = "/api/drive-upload"
+  to     = "/.netlify/functions/drive-upload"
+  status = 200
+
+[[redirects]]
+  from   = "/api/upload-media"
+  to     = "/.netlify/functions/upload-media"
+  status = 200
+
+[[redirects]]
   from   = "/api/*"
   to     = "/.netlify/functions/:splat"
   status = 200
