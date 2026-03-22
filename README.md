@@ -1,6 +1,8 @@
 <div align="center">
 
-<img src="wsti-logo.png" alt="Western Sydney Tech Innovators Logo" width="320"/>
+<table width="100%"><tr><td align="center" bgcolor="#061D2E" style="padding:28px 0 24px 0;">
+<img src="wsti-logo.png" alt="Western Sydney Tech Innovators Logo" width="340"/>
+</td></tr></table>
 
 # 🚀 WSTI Social Media Hub
 
