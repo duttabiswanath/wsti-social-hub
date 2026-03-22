@@ -1,0 +1,28 @@
+[build]
+  functions = "netlify/functions"
+  publish   = "."
+
+  [build.environment]
+    NODE_VERSION = "18"
+
+# API routes → Netlify Functions (single-segment splat)
+[[redirects]]
+  from   = "/api/generate-recap"
+  to     = "/.netlify/functions/generate-recap"
+  status = 200
+
+[[redirects]]
+  from   = "/api/generate-graphic-ai"
+  to     = "/.netlify/functions/generate-graphic-ai"
+  status = 200
+
+[[redirects]]
+  from   = "/api/*"
+  to     = "/.netlify/functions/:splat"
+  status = 200
+
+# SPA fallback — serve dashboard for all other routes
+[[redirects]]
+  from   = "/*"
+  to     = "/wsti-dashboard.html"
+  status = 200
